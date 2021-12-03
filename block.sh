@@ -15,9 +15,6 @@
 # maximum number of IPs per list and getting an error
 # 'ipset v7.1: Hash is full, cannot add more elements'
 
-
-#wget https://anthonykuske.com/us-ips.txt -O ips.txt
-
 STARTPORT=8000
 ENDPORT=9000
 INPUTFILE="ips.txt"
