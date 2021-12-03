@@ -15,8 +15,9 @@
 # maximum number of IPs per list and getting an error
 # 'ipset v7.1: Hash is full, cannot add more elements'
 
-STARTPORT=8000
-ENDPORT=9000
+#STARTPORT=8000
+#ENDPORT=9000
+PORTS=8100,8300 
 INPUTFILE="ips.txt"
 
 IPSET=ipset
@@ -75,6 +76,6 @@ done < ips.txt
 for (( c=1; c<=$listnumber; c++ ))
 do  
     listname="${listprefix}-${c}"
-    echo "$IPTABLES -I INPUT -p tcp --dport $STARTPORT:$ENDPORT -m set --match-set $listname src -j DROP"
-    $IPTABLES -I INPUT -p tcp --dport $STARTPORT:$ENDPORT -m set --match-set $listname src -j DROP
+    echo "$IPTABLES -I INPUT -p tcp --match multiport --dports $PORTS -m set --match-set $listname src -j DROP"
+    $IPTABLES -I INPUT -p tcp --match multiport --dports $PORTS -m set --match-set $listname src -j DROP
 done
